@@ -1,0 +1,92 @@
+{
+  "name": "slazzer_canvas_project",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@babel/preset-flow": "^7.12.1",
+    "@material-ui/core": "^4.11.2",
+    "@quickbaseoss/babel-plugin-styled-components-css-namespace": "^1.0.1",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "caman": "^4.1.2",
+    "cropperjs": "^1.5.5",
+    "image-type": "^4.1.0",
+    "js-sha1": "^0.6.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.1",
+    "styled-components": "^4.4.0",
+    "throttle-debounce": "^2.1.0",
+    "uuid": "^3.4.0",
+    "web-vitals": "^0.2.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-export-default-from": "^7.8.3",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-syntax-jsx": "^7.8.3",
+    "@babel/plugin-transform-arrow-functions": "^7.8.3",
+    "@babel/plugin-transform-object-assign": "^7.8.3",
+    "@babel/plugin-transform-react-jsx": "^7.9.4",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-react": "^7.9.4",
+    "ajv": "^6.12.2",
+    "ajv-keywords": "^3.4.1",
+    "babel-loader": "^8.1.0",
+    "css-loader": "0.28.7",
+    "gh-pages": "^2.2.0",
+    "highlight.js": "9.13.1",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "0.19.0",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.2"
+  },
+  "peerDependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+
+    "start-demo-js": "webpack-dev-server --mode development --config config/webpack.demo-js-config.js",
+    "start-demo-react": "webpack-dev-server --mode development --config config/webpack.demo-react-config.js",
+    "clean-demo-js": "rm -rf examples/js/dist",
+    "build-demo-js": "npm run clean-demo-js && webpack --mode production --config config/webpack.demo-js-config.js",
+    "build-demo-js-latest": "npm run clean-demo-js && webpack --mode production --config config/webpack.demo-js-config.js",
+    "clean-demo-react": "rm -rf examples/react/dist",
+    "build-demo-react": "npm run clean-demo-react && webpack --mode production --config config/webpack.demo-react-config.js",
+    "clean-build": "rm -rf build",
+    "build-new": "webpack --mode production --config config/webpack.js-config.js",
+    "build-w": "npm run clean-build && npm run build-new && .\\scripts\\copy_build.sh",
+    "clean-dist": "rm -rf dist",
+    "dist": "npm run clean-dist && npx babel projects/react --out-dir dist --copy-files",
+    "deploy": "gh-pages -d examples/js/dist",
+    "publish-demo": "npm run build-demo-js && npm run deploy"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
