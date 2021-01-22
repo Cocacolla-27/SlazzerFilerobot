@@ -7,7 +7,7 @@ const PreviewWrapper = styled.div`
   text-align: center;
   line-height: calc(100% - 187px);
   position: relative;
-  display: flex
+  display: flex;
   &:before {
     content: '';
     display: inline-block;

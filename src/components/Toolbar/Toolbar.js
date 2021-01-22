@@ -18,10 +18,14 @@ export default class extends Component {
   render() {
     const { activeTab, isShowSpinner, activeBody, config } = this.props;
     const { tools } = config;
+    const { editorItems } = config;
 
     return (
       <Toolbar overlayYHidden={activeTab !== 'watermark'}>
-        {!activeTab && tools.map(name => <Tool name={name} key={name} {...this.props}/>)}
+        {editorItems.map(obj => 
+          <Tool icon = {obj.icon} name = {obj.name} />
+        )}
+
         {/* {activeTab === 'adjust' && <Adjust {...this.props}/>}
         {activeTab === 'effects' && <Effects {...this.props}/>}
         {activeTab === 'filters' && <Filters {...this.props}/>}
@@ -35,6 +39,7 @@ export default class extends Component {
         {activeTab === 'text' && <Text {...this.props}/>}
         {(isShowSpinner) && <NoClickOverlay/>}
         {activeBody !== 'preview' && <NoClickToolbar/>} */}
+        
       </Toolbar>
     )
   }

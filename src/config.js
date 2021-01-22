@@ -82,6 +82,20 @@ export const DEFAULT_WATERMARK = {
 
 const WATERMARK_UNIQUE_KEY = 'watermark-layer';
 
+
+const EDITOR_ITEMS = [
+  { icon: 'params', name: 'Edit' },
+  { icon: 'pictures', name: 'Bg Image' },
+  { icon: 'paintbrush', name: 'Bg Color' },
+  { icon: 'pencil', name: 'Text' },
+  { icon: 'diamond', name: 'Templates' },
+  { icon: 'droplet', name: 'Add Blur' },
+  { icon: 'star', name: 'Saturation Effects' },
+  { icon: 'heart', name: 'Artsy Options' },
+  { icon: 'omega', name: 'Add logo' },
+  { icon: 'frame', name: 'Frames' }
+];
+
 const cropPresets = [
   { name: 'original', value: 0 },
   { name: 'square', value: 1 },
@@ -218,5 +232,6 @@ export {
   CANVAS_ID,
   ORIGINAL_CANVAS_ID,
   SAVE_MODES,
-  CONTAINER_SELECTOR
+  CONTAINER_SELECTOR,
+  EDITOR_ITEMS
 };

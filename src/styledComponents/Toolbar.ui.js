@@ -3,11 +3,13 @@ import { getIconStyles, getIconByName } from './styleUtils';
 
 
 const Toolbar = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100%;
   overflow-x: ${p => p.overlayYHidden ? 'auto' : 'none'};
   overflow-y: ${p => p.overlayYHidden ? 'hidden' : 'visible'};
-  white-space: nowrap;
   text-align: center;
+  color: white;
   
   ::-webkit-scrollbar {
     height: 10px !important;
@@ -26,20 +28,13 @@ const Toolbar = styled.div`
 `;
 
 const ToolWrapper = styled.div`
-  padding: 20px 10px;
+  padding: 10px 0px;
   cursor: pointer;
   display: inline-block;
-  min-width: 80px;
-  min-height: 100px;
   text-align: center;
   font-size: 12px;
-  color: ${props => props.theme.colors.text};
-  text-transform: ${props => props.noCapitalStrs ? 'none' : props.tt || 'capitalize'};
-  background: ${props => props.active ? props.theme.colors.secondaryBg : 'inherit'};
-  
   &:hover {
-    color: ${props => props.theme.colors.textHover};
-    background: ${props => props.theme.colors.secondaryBg};
+    background: #333333;
   }
 `;
 
@@ -52,8 +47,9 @@ const ToolIcon = styled.div`
 `;
 
 const ToolLabel = styled.div`
-  height: 20px;
-  line-height: 20px;
+  font-family: 'Poppins', 'sans-serif';
+  line-height: 18px;
+  margin-top: 8px;
 `;
 
 const EffectsWrapper = styled.div`

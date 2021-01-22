@@ -6,4 +6,4 @@ export { default as Toolbar } from './Toolbar/Toolbar';
 export { default as Tool } from './Toolbar/Tool';
 
 export { default as Header } from './Header/Header';
-export { default as EditorOption} from './Toolbar/EditorOption';
+export { default as OptionsContainer} from './Toolbar/OptionsContainer';

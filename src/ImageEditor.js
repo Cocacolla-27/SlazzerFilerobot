@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { PreviewWrapper, Spinner, Wrapper, ToolbarWrapper, EditorItemsWrapper } from './styledComponents/index';
+import { PreviewWrapper, Spinner, Wrapper, ToolbarWrapper, EditorItemsWrapper, ToolbarOptionWrapper } from './styledComponents/index';
 import { Footer, Header, PreResize, Preview, EditorOption } from './components/index';
 import imageType from 'image-type';
 import './lib/caman';
-import { DEFAULT_WATERMARK, ON_CLOSE_STATUSES } from './config';
+import { DEFAULT_WATERMARK, ON_CLOSE_STATUSES, EDITOR_ITEMS } from './config';
 import { getCanvasNode } from './utils';
 import {Toolbar} from './components/index';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const INITIAL_PARAMS = {
@@ -41,6 +42,7 @@ export default class extends Component {
       isShowSpinner: true,
       isHideCanvas: false,
       activeTab: null,
+      activeToolTab: null,
       activeBody: null,
       currentOperation: null,
       original: { width: 300, height: 200 },
@@ -150,15 +152,23 @@ export default class extends Component {
       } else {
         const { config } = this.props;
         const { tools } = config;
+        const { editorItems } = config;
         const isOneTool = tools.length === 1;
+        const isOneToolTab = editorItems.length === 1;
         let activeTab;
+        let activeToolTab;
 
         if (isOneTool) {
           activeTab = tools[0];
         }
 
+        if (isOneToolTab) {
+          activeToolTab = editorItems[0].name
+        }
+
         this.setState({ ...propsOnApply, activeBody: 'preview', isPreResize: false }, () => {
           this.setState({ activeTab });
+          this.setState({ activeToolTab });
         });
       }
     }
@@ -354,7 +364,7 @@ export default class extends Component {
 
   render() {
     const {
-      isShowSpinner, activeTab, operations, operationsOriginal, operationsZoomed, currentOperation, isHideCanvas,
+      isShowSpinner, activeTab, activeToolTab, operations, operationsOriginal, operationsZoomed, currentOperation, isHideCanvas,
       cropDetails, original, canvasDimensions, processWithCloudimage, processWithFilerobot, processWithCloudService,
       uploadCloudimageImage, imageMime, lastOperation, operationList, initialZoom, canvasZoomed, canvasOriginal,
       reduceBeforeEdit, cropBeforeEdit, img, imageName, activeBody, isPreResize, preCanvasDimensions, logoImage,
@@ -378,6 +388,7 @@ export default class extends Component {
       availableShapes,
       latestCanvasSize
     } = this.state;
+    
     const { src, config, onClose, onComplete, closeOnLoad = true, t = {}, theme } = this.props;
     const imageParams = { effect, filter, crop, resize, rotate, flipX, flipY, adjust, correctionDegree };
     const headerProps = {
@@ -426,7 +437,8 @@ export default class extends Component {
     const toolbarProps = {
       t, 
       config,
-      activeTab
+      activeTab,
+      activeToolTab
     };
 
     const previewProps = {
@@ -507,14 +519,19 @@ export default class extends Component {
           {/* <EditorItemsWrapper>
             <EditorOption {...this.props}/>
           </EditorItemsWrapper> */}
-          <ToolbarWrapper overlayYHidden={activeTab !== 'watermark'}>
+          <EditorItemsWrapper overlayYHidden={activeTab !== 'watermark'}>
             <Toolbar {...toolbarProps}/>
-          </ToolbarWrapper>
-          {activeBody === 'preview' && <Preview {...previewProps}/>}
-          {activeBody === 'preResize' && <PreResize {...previewProps}/>}
-
+          </EditorItemsWrapper>
+          <div className="w-100" >
+            {activeBody === 'preview' && <Preview {...previewProps}/>}
+            {activeBody === 'preResize' && <PreResize {...previewProps}/>}
+          </div>
+          <ToolbarOptionWrapper>
+            {/* <ToolbarOption/> */}
+        </ToolbarOptionWrapper>
           <Spinner overlay show={isShowSpinner} label={t['spinner.label']}/>
         </PreviewWrapper>
+        
         <Footer {...footerProps}/>
 
       </Wrapper>

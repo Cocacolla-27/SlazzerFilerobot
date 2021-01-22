@@ -3,12 +3,12 @@ import { Button } from './Button';
 import { getHoverColor } from './styleUtils';
 
 const HeaderWrapper = styled.div`
-  background: ${props => props.theme.colors.secondaryBg};
+  background: #323232;
 `;
 
 const HeaderTop = styled.div`
   line-height: 35px;
-  background: ${props => props.theme.colors.primaryBg};
+  background: transparent;
   padding: 0px 0;
   height: 50px
 `;
@@ -60,7 +60,6 @@ const ToolbarWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100px;
   background: ${props => props.theme.colors.secondaryBg};
   
   @media (max-width: 768px) {

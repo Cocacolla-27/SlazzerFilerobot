@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 const EditorItemsWrapper = styled.div`
   width: 84px;
+  padding: 10px 8px;
+  background: rgb(43,43,43);
   line-height: calc(100% - 187px);
   position: relative;
   transition: width .5s ease;

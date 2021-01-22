@@ -32,6 +32,7 @@ class Icon extends Component {
         const iconClassName = `icon-${name} ${className}`;
         const iconStyle = Object.assign({}, this.props.style, {
             fontSize: `${size}px`,
+            width: '20px',
             color,
         });
         return (<i className={iconClassName} style={iconStyle} onClick={this.props.onClick} />);

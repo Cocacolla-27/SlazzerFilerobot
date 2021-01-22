@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Container = styled('div')`
   height: 100%;
   width: 100%;
-  overflow-y: auto;
+
   
   ::-webkit-scrollbar {
     height: 10px !important;
@@ -401,4 +401,9 @@ const Wrapper = styled.div`
   }
 `;
 
-export { Wrapper, Container };
+const ToolbarOptionWrapper = styled.div`
+  width: 240px;
+  background: #323232
+`;
+
+export { Wrapper, Container, ToolbarOptionWrapper };

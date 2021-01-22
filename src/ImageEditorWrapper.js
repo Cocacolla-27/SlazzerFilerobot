@@ -3,7 +3,7 @@ import ImageEditor from './ImageEditor';
 import { Container } from './styledComponents';
 import { ThemeProvider } from 'styled-components';
 import { Modal } from './components/Modal';
-import { CLOUDIMAGE_OPERATIONS, TOOLS, UPLOADER, ON_CLOSE_STATUSES, STANDARD_FONTS, CONTAINER_SELECTOR } from './config';
+import { CLOUDIMAGE_OPERATIONS, TOOLS, UPLOADER, ON_CLOSE_STATUSES, STANDARD_FONTS, CONTAINER_SELECTOR, EDITOR_ITEMS } from './config';
 import './assets/fonts/filerobot-font.css';
 import translations from './assets/i18n';
 import dark from './assets/theme/dark';
@@ -67,6 +67,7 @@ class ImageEditorWrapper extends Component {
   processConfig = (config) => {
     const processWithCloudService = config.processWithCloudimage;
     const tools = config.tools || (processWithCloudService ? CLOUDIMAGE_OPERATIONS : TOOLS);
+    const editorItems =  config.editorItems || (processWithCloudService ? CLOUDIMAGE_OPERATIONS : EDITOR_ITEMS);
 
     return {
       ...UPLOADER,
@@ -74,8 +75,8 @@ class ImageEditorWrapper extends Component {
       processWithFilerobot: !!config.filerobot,
       processWithCloudimage: !!config.cloudimage,
       ...config,
-      tools: processWithCloudService ? tools.filter(tool => CLOUDIMAGE_OPERATIONS.indexOf(tool) > -1) : tools
-
+      tools: processWithCloudService ? tools.filter(tool => CLOUDIMAGE_OPERATIONS.indexOf(tool) > -1) : tools,
+      editorItems:  editorItems
     };
   }
 
