@@ -14,7 +14,7 @@ import { isServerSide } from './utils/is-server-side';
 class ImageEditorWrapper extends Component {
   _isMounted = false;
 
-  constructor({ show = false, src = '', config = {} }) {
+  constructor({ src1 = '', config = {} }) {
     super();
 
     config.translations = config.translations || {};
@@ -27,8 +27,7 @@ class ImageEditorWrapper extends Component {
     const isCustomColorScheme = typeof config.colorScheme === 'object';
 
     this.state = {
-      isVisible: show,
-      src,
+      src1,
       config: this.processConfig(config),
       t: {
         ...translations[config.language],
@@ -58,11 +57,11 @@ class ImageEditorWrapper extends Component {
     this._isMounted = false;
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.show !== prevProps.show) {
-      if (this.props.show) { this.open(this.props.src); } else { this.close(); }
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.show !== prevProps.show) {
+  //     if (this.props.show) { this.open(this.props.src1); } else { this.close(); }
+  //   }
+  // }
 
   processConfig = (config) => {
     const processWithCloudService = config.processWithCloudimage;
@@ -80,11 +79,11 @@ class ImageEditorWrapper extends Component {
     };
   }
 
-  open = (src) => {
+  open = (src1) => {
     const { onOpen } = this.props;
 
     if (this._isMounted) {
-      this.setState({ isVisible: true, src }, () => {
+      this.setState({ isVisible: true, src1 }, () => {
         if (onOpen) onOpen();
       });
     }
@@ -102,18 +101,16 @@ class ImageEditorWrapper extends Component {
   }
 
   render() {
-    const { isVisible, src, config, t, theme } = this.state;
+    const { isVisible, src1, config, t, theme } = this.state;
     const { onComplete = () => {}, onBeforeComplete, closeOnLoad } = this.props;
     const { showInModal = true } = config;
 
-    if (!src || !isVisible || isServerSide) return null;
-
-    if(src instanceof Blob && config.processWithCloudimage) return null;
+    // if(src1 instanceof Blob && config.processWithCloudimage) return null;
 
     const Inner = (
       <Container>
         <ImageEditor
-          src={src}
+          src1={src1}
           config={config}
           onComplete={onComplete}
           onBeforeComplete={onBeforeComplete}

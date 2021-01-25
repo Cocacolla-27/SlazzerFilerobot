@@ -204,7 +204,6 @@ function Edit(props) {
 
     const { updateState, apply, activeTab, handleSave, setCropping, initialZoom, cropDetails, original, t, config, onRotate, correctionDegree, flipX, flipY } = props;
     const { width, height } = cropDetails;
-    console.log("11111 : ", width, height)
     const applyAndSave = () => { apply(); };
     // original: { width = 1, height = 1 },
     const { cropPresets = [] } = config

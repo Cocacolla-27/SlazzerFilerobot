@@ -8,3 +8,5 @@ export { default as Tool } from './Toolbar/Tool';
 export { default as Header } from './Header/Header';
 // export { default as OptionsContainer} from './Toolbar/OptionsContainer';
 export { default as ToolbarOption } from './Toolbar/ToolbarOption';
+
+export { default as Dropzone } from './Dropzone'

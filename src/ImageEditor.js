@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { PreviewWrapper, Spinner, Wrapper, ToolbarWrapper, EditorItemsWrapper, ToolbarOptionWrapper } from './styledComponents/index';
-import { Footer, Header, PreResize, Preview, EditorOption, ToolbarOption } from './components/index';
+import { Footer, Header, PreResize, Preview, EditorOption, ToolbarOption, Dropzone } from './components/index';
 import imageType from 'image-type';
 import './lib/caman';
 import { DEFAULT_WATERMARK, ON_CLOSE_STATUSES, EDITOR_ITEMS } from './config';
@@ -45,6 +45,7 @@ export default class extends Component {
       activeToolTab: null,
       activeBody: null,
       currentOperation: null,
+      src: null,
       original: { width: 300, height: 200 },
       cropDetails: { width: 300, height: 200 },
       canvasDimensions: { width: 300, height: 200, ratio: 1.5 },
@@ -72,23 +73,29 @@ export default class extends Component {
       focusPoint: { x: null, y: null },
       shapes: [],
       selectedShape: {},
-      availableShapes: []
+      availableShapes: [],
+      isDropped: true
     }
   }
 
-  componentDidMount() {
+   componentDidMount() {
     this._isMounted = true;
-    this.loadImage();
-    this.determineImageType();
+
+     this.setState({
+     isShowSpinner : false
+     })
+      // this.loadImage();
+    // this.determineImageType();
   }
 
   componentWillUnmount() {
     this._isMounted = false;
+    this.determineImageType();
   }
 
   loadImage = () => {
-    let { src } = this.props;
-    const { reduceBeforeEdit: { mode, widthLimit, heightLimit } = {}, watermark } = this.state;
+    
+    const { reduceBeforeEdit: { mode, widthLimit, heightLimit } = {}, watermark, src } = this.state;
 
     if (src instanceof Blob) { src = URL.createObjectURL(src); }
 
@@ -172,6 +179,7 @@ export default class extends Component {
         });
       }
     }
+
   }
 
   determineImageType = () => {
@@ -362,6 +370,10 @@ export default class extends Component {
     }
   }
 
+  updateSrc = (src) => {
+    this.setState({ src });
+  }
+
   render() {
     const {
       isShowSpinner, activeTab, activeToolTab, operations, operationsOriginal, operationsZoomed, currentOperation, isHideCanvas,
@@ -369,7 +381,7 @@ export default class extends Component {
       uploadCloudimageImage, imageMime, lastOperation, operationList, initialZoom, canvasZoomed, canvasOriginal,
       reduceBeforeEdit, cropBeforeEdit, img, imageName, activeBody, isPreResize, preCanvasDimensions, logoImage,
       imageSealing,
-
+      src,
       effect,
       filter,
       crop,
@@ -386,10 +398,11 @@ export default class extends Component {
       shapeOperations,
       selectedShape,
       availableShapes,
-      latestCanvasSize
+      latestCanvasSize,
+      isDropped
     } = this.state;
 
-    const { src, config, onClose, onComplete, closeOnLoad = true, t = {}, theme } = this.props;
+    const { config, onClose, onComplete, closeOnLoad = true, t = {}, theme } = this.props;
     const imageParams = { effect, filter, crop, resize, rotate, flipX, flipY, adjust, correctionDegree };
     const headerProps = {
       t,
@@ -441,6 +454,11 @@ export default class extends Component {
       activeToolTab,
 
     };
+
+    const dropProps = {
+      activeDrop: ()=>this.setState({isDropped: false}),
+      updateSrc: this.updateSrc,
+    }
 
     const previewProps = {
       t,
@@ -527,12 +545,13 @@ export default class extends Component {
             <ToolbarOptionWrapper>
               <ToolbarOption {...headerProps} />
             </ToolbarOptionWrapper>
-            <div className="d-flex justify-content-center" style={{ width: 'calc(100% - 260px)' }}>
+            {isDropped ? <Dropzone {...dropProps}/> :
+              <div className="d-flex justify-content-center" style={{ width: 'calc(100% - 260px)' }} onChange={ src ? this.loadImage() : null}>
               {activeBody === 'preview' && <Preview {...previewProps} />}
               {activeBody === 'preResize' && <PreResize {...previewProps} />}
-            </div>
+            </div>}
           </div>
-
+        
           <Spinner overlay show={isShowSpinner} label={t['spinner.label']} />
         </PreviewWrapper>
 
