@@ -25,7 +25,7 @@ const PreResizeBox = styled('div')`
 const PreviewImgBox = styled.div`
   display: inline-block;
   max-height: 100%;
-  max-width: 100%;
+  width: 600px;
   height: 100%;
   vertical-align: middle;
 

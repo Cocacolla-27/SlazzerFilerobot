@@ -158,7 +158,7 @@ const Wrapper = styled.div`
     outline: 1px solid #fff;
     overflow: hidden;
     width: 100%;
-    ${({ roundCrop}) => roundCrop && 'border-radius: 50%'};
+    ${({ roundCrop }) => roundCrop && 'border-radius: 50%'};
   }
   
   .cropper-dashed {
@@ -402,7 +402,11 @@ const Wrapper = styled.div`
 `;
 
 const ToolbarOptionWrapper = styled.div`
-  width: 240px;
+  padding: 20px 15px;
+  position: absolute;
+  width: 260px;
+  height: 100%;
+  right: 0;
   background: #323232
 `;
 

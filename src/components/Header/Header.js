@@ -22,7 +22,7 @@ export default class extends Component {
       <HeaderWrapper>
         <HeaderTop>
           <Title noCapitalStrs={noCapitalStrs}>{t[`toolbar.${filteredName}`] || t[`header.image_editor_title`]}</Title>
-          <ButtonsWrapper>
+          {/* <ButtonsWrapper>
             <CancelBtn
               hide={!activeTab}
               onClick={isOneTool ? cancelBtnClosingFn : onRevert}
@@ -40,12 +40,12 @@ export default class extends Component {
             >
               {!activeTab || activeTab === 'resize' ? onFinishButtonLabel : t['toolbar.apply']}
             </Button>
-          </ButtonsWrapper>
-          
+          </ButtonsWrapper> */}
+
           {/* <CloseBtn onClick={onClose} title={t[`header.close_modal`]} {...closeButtonProps}>
             {!closeButtonProps?.noLabel && (closeButtonProps?.label || t['header.close'])}
           </CloseBtn> */}
-          <HeaderImgLogo><img src="assets/images/white-logo.png" style={{height: '40px'}}></img></HeaderImgLogo>
+          <HeaderImgLogo><img src="assets/images/white-logo.png" style={{ height: '40px' }}></img></HeaderImgLogo>
         </HeaderTop>
 
         {/* <ToolbarWrapper overlayYHidden={activeTab !== 'watermark'}>

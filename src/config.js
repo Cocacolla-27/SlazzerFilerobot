@@ -103,7 +103,7 @@ const cropPresets = [
   { name: 'round', value: 1, radius: 50 },
   { name: '5 : 4', value: 1.25 },
   { name: '4 : 3', value: 1.33333 },
-  { name: '6 : 4', value: 1.5 },
+  { name: '4 : 6', value: 0.66667 },
   { name: '16 : 9', value: 1.7777 }
 ];
 

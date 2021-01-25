@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { PreviewWrapper, Spinner, Wrapper, ToolbarWrapper, EditorItemsWrapper, ToolbarOptionWrapper } from './styledComponents/index';
-import { Footer, Header, PreResize, Preview, EditorOption } from './components/index';
+import { Footer, Header, PreResize, Preview, EditorOption, ToolbarOption } from './components/index';
 import imageType from 'image-type';
 import './lib/caman';
 import { DEFAULT_WATERMARK, ON_CLOSE_STATUSES, EDITOR_ITEMS } from './config';
 import { getCanvasNode } from './utils';
-import {Toolbar} from './components/index';
+import { Toolbar } from './components/index';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -69,7 +69,7 @@ export default class extends Component {
 
       ...INITIAL_PARAMS,
       watermark: watermark || DEFAULT_WATERMARK,
-      focusPoint: {x: null, y: null},
+      focusPoint: { x: null, y: null },
       shapes: [],
       selectedShape: {},
       availableShapes: []
@@ -107,7 +107,7 @@ export default class extends Component {
     img.src = src;
     if (!src.startsWith('data:image/') && !src.startsWith('blob:')) {
       // Image is not a blob, insert query param to avoid caching
-      img.src = img.src + (img.src.indexOf('?') > -1 ? '&version='  : '?version=') + new Date().getTime();
+      img.src = img.src + (img.src.indexOf('?') > -1 ? '&version=' : '?version=') + new Date().getTime();
     }
 
     img.onload = () => {
@@ -191,7 +191,7 @@ export default class extends Component {
     xhr.send();
   }
 
-  updateState = (props, callback = () => {}) => {
+  updateState = (props, callback = () => { }) => {
     if (this._isMounted) {
       const editorWrapperId = this.props.config.elementId;
       const canvas = getCanvasNode(editorWrapperId);
@@ -305,7 +305,7 @@ export default class extends Component {
     this.setState({ activeTab: null });
   }
 
-  redoOperation = ({ operationIndex, callback = () => {}, resetActiveTab = true, operationObject = {} }) => {
+  redoOperation = ({ operationIndex, callback = () => { }, resetActiveTab = true, operationObject = {} }) => {
     const { applyOperations } = this.state;
 
     if (resetActiveTab) {
@@ -388,7 +388,7 @@ export default class extends Component {
       availableShapes,
       latestCanvasSize
     } = this.state;
-    
+
     const { src, config, onClose, onComplete, closeOnLoad = true, t = {}, theme } = this.props;
     const imageParams = { effect, filter, crop, resize, rotate, flipX, flipY, adjust, correctionDegree };
     const headerProps = {
@@ -435,10 +435,11 @@ export default class extends Component {
       availableShapes
     };
     const toolbarProps = {
-      t, 
+      t,
       config,
       activeTab,
-      activeToolTab
+      activeToolTab,
+
     };
 
     const previewProps = {
@@ -509,30 +510,33 @@ export default class extends Component {
       config,
       watermark
     };
-                                                            
+
     return (
       <Wrapper roundCrop={roundCrop} isLoading={isShowSpinner}>
 
-        <Header {...headerProps}/>
+        <Header {...headerProps} />
 
         <PreviewWrapper>
           {/* <EditorItemsWrapper>
             <EditorOption {...this.props}/>
           </EditorItemsWrapper> */}
           <EditorItemsWrapper overlayYHidden={activeTab !== 'watermark'}>
-            <Toolbar {...toolbarProps}/>
+            <Toolbar {...toolbarProps} />
           </EditorItemsWrapper>
-          <div className="w-100" >
-            {activeBody === 'preview' && <Preview {...previewProps}/>}
-            {activeBody === 'preResize' && <PreResize {...previewProps}/>}
+          <div className="w-100 d-flex" >
+            <ToolbarOptionWrapper>
+              <ToolbarOption {...headerProps} />
+            </ToolbarOptionWrapper>
+            <div className="d-flex justify-content-center" style={{ width: 'calc(100% - 260px)' }}>
+              {activeBody === 'preview' && <Preview {...previewProps} />}
+              {activeBody === 'preResize' && <PreResize {...previewProps} />}
+            </div>
           </div>
-          <ToolbarOptionWrapper>
-            {/* <ToolbarOption/> */}
-        </ToolbarOptionWrapper>
-          <Spinner overlay show={isShowSpinner} label={t['spinner.label']}/>
+
+          <Spinner overlay show={isShowSpinner} label={t['spinner.label']} />
         </PreviewWrapper>
-        
-        <Footer {...footerProps}/>
+
+        <Footer {...footerProps} />
 
       </Wrapper>
     )

@@ -17,14 +17,14 @@ export default class extends Component {
   changeWidth = (event) => {
     const { initialZoom } = this.props;
 
-    window.scaleflexPlugins.cropperjs.setCropBoxData({ width: +event.target.value / initialZoom / window.scaleflexPlugins.zoom  });
+    window.scaleflexPlugins.cropperjs.setCropBoxData({ width: +event.target.value / initialZoom / window.scaleflexPlugins.zoom });
   }
 
 
   changeHeight = (event) => {
     const { initialZoom } = this.props;
 
-    window.scaleflexPlugins.cropperjs.setCropBoxData({ height: +event.target.value / initialZoom / window.scaleflexPlugins.zoom  });
+    window.scaleflexPlugins.cropperjs.setCropBoxData({ height: +event.target.value / initialZoom / window.scaleflexPlugins.zoom });
   }
 
   toggleRatio = (event) => {
@@ -78,7 +78,7 @@ export default class extends Component {
           </FieldSet>
           <BlockRatioWrapper>
             <BlockRatioBtn active={aspectRatio} link onClick={this.toggleRatio}>
-              <BlockRatioIcon active={aspectRatio}/>
+              <BlockRatioIcon active={aspectRatio} />
             </BlockRatioBtn>
           </BlockRatioWrapper>
           <FieldSet>
@@ -102,7 +102,7 @@ export default class extends Component {
             >
               <CropBoxInner>
                 <CropShapeWrapper>
-                  <ShapeAligner/>
+                  <ShapeAligner />
                   <CropShape ratio={box.value || original.width / original.height} radius={box.radius} />
                 </CropShapeWrapper>
                 <CropLabel>

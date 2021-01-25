@@ -1,0 +1,10 @@
+#sizeValue, #sizeValue-label {
+    color: #a1a1a1;
+}
+
+#sizeValue {
+    margin-top: 5px;
+    font-size: 12px;
+    height: 22px;
+    padding: 5px 0;
+}
