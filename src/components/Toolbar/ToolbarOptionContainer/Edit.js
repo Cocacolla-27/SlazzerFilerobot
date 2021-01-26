@@ -250,8 +250,9 @@ function Edit(props) {
         switch (event.target.value) {
             case "0":
                 changeRatio(cropPresets[0])
+               
+                console.log("tttyyty")
                 break;
-
             case "10":
                 changeRatio(cropPresets[1])
                 break;
@@ -318,7 +319,7 @@ function Edit(props) {
 
     return (
         <>
-            <Accordion expanded={expanded === 'panel1'} onChange={handleAccordionChange('panel1')} onClick={() => setCropping()}>
+            <Accordion disabled={false} expanded={expanded === 'panel1'} onChange={handleAccordionChange('panel1')} onClick={() => setCropping()}>
                 <AccordionSummary
                     aria-controls="panel1a-content"
                     id="panel1a-header"

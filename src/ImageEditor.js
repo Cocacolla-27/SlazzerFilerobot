@@ -7,6 +7,9 @@ import { DEFAULT_WATERMARK, ON_CLOSE_STATUSES, EDITOR_ITEMS } from './config';
 import { getCanvasNode } from './utils';
 import { Toolbar } from './components/index';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
+import Icon from './components/icon/Icon';
+import IconButton from '@material-ui/core/IconButton';
 
 
 const INITIAL_PARAMS = {
@@ -74,7 +77,8 @@ export default class extends Component {
       shapes: [],
       selectedShape: {},
       availableShapes: [],
-      isDropped: true
+      isDropped: true,
+      activeClose: true
     }
   }
 
@@ -180,6 +184,18 @@ export default class extends Component {
       }
     }
 
+  }
+
+  onActiveClose = () => {
+    this.setState({
+      activeClose : false
+    })
+  }
+
+  onDeactiveClose = () => {
+    this.setState({
+      activeClose : true
+    })
   }
 
   determineImageType = () => {
@@ -399,7 +415,8 @@ export default class extends Component {
       selectedShape,
       availableShapes,
       latestCanvasSize,
-      isDropped
+      isDropped,
+      activeClose
     } = this.state;
 
     const { config, onClose, onComplete, closeOnLoad = true, t = {}, theme } = this.props;
@@ -447,12 +464,13 @@ export default class extends Component {
       selectedShape,
       availableShapes
     };
+
     const toolbarProps = {
       t,
       config,
       activeTab,
       activeToolTab,
-
+      onActiveClose: this.onActiveClose
     };
 
     const dropProps = {
@@ -510,6 +528,7 @@ export default class extends Component {
       selectedShape,
       latestCanvasSize
     };
+
     const footerProps = {
       logoImage,
       t,
@@ -542,10 +561,20 @@ export default class extends Component {
             <Toolbar {...toolbarProps} />
           </EditorItemsWrapper>
           <div className="w-100 d-flex" >
-            <ToolbarOptionWrapper>
-              <ToolbarOption {...headerProps} />
-            </ToolbarOptionWrapper>
-            {isDropped ? <Dropzone {...dropProps}/> :
+            {!activeClose &&
+              <ToolbarOptionWrapper>
+              <div style={{ padding: '20px 15px', position: 'relative' }}>
+                <span className="closeBtn">
+                  <IconButton color="" aria-label="close" style={{padding: 0}}>
+                    <Icon name="circle-with-cross" />
+                  </IconButton>
+                </span>
+                
+                <ToolbarOption {...headerProps} />
+              </div>
+              </ToolbarOptionWrapper>
+            } 
+            {isDropped ? <Dropzone {...dropProps} /> :
               <div className="d-flex justify-content-center" style={{ width: 'calc(100% - 260px)' }} onChange={ src ? this.loadImage() : null}>
               {activeBody === 'preview' && <Preview {...previewProps} />}
               {activeBody === 'preResize' && <PreResize {...previewProps} />}

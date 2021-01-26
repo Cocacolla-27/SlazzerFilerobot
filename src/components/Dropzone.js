@@ -9,7 +9,8 @@ export default class extends Component {
 
 render(){
     const {
-      activeDrop, updateSrc
+		activeDrop, updateSrc
+		
     } = this.props;
   
   console.log("activeDrop : ", activeDrop);
@@ -89,12 +90,14 @@ render(){
 				return false
 			},
 		};
-		return (
+	return (
+			<div className="dragBox">
 			<Dragger {...props}>
 				<div className="dropImgBox">
-					<div className="upload-box"><img src="images/dropImage.png" /></div>
+					<div className="upload-box"><img src="assets/images/drop-image.png"/></div>
 				</div>
 			</Dragger>
+			</div>
 		);
   }
 }

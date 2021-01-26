@@ -5,14 +5,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class extends Component {
   render() {
-    const { icon, name, activeTab, updateState, t } = this.props;
+    const { icon, name, activeTab, updateState, t, onActiveClose } = this.props;
     const filteredName = name === 'rotate' ? 'orientation' : name;
 
     return (
       <ToolWrapper
         className="mb-1"
         active={activeTab === name}
-        onClick={() => updateState({ activeTab: name })}
+        // onClick={() => updateState({ activeTab: name })}
+        onClick = {()=>onActiveClose()}
       >
         <div className="d-flex align-items-center justify-content-center flex-column m">
           <Icon name={icon} />

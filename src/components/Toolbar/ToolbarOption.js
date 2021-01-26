@@ -12,6 +12,7 @@ import FocusPoint from './FocusPoint';
 import Shapes from './Shapes';
 import Image from './Image';
 import Text from './Text';
+import Icon from '../icon/Icon';
 
 
 export default class extends Component {
@@ -34,9 +35,9 @@ export default class extends Component {
         {activeTab === 'filters' && <Filters {...this.props}/>}
         {activeTab === 'rotate' && <Orientation {...this.props}/>} */}
 
-        {(isShowSpinner) && <NoClickOverlay />}
-        {activeBody !== 'preview' && <NoClickToolbar />}
-
+        {/* {(isShowSpinner) && <NoClickOverlay />}
+        {activeBody !== 'preview' && <NoClickToolbar />} */}
+       
         <Edit setCropping={() => {
           this.setState({ isCropping: true })
           updateState({ activeTab: 'crop' })

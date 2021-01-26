@@ -23,7 +23,7 @@ export default class extends Component {
     return (
       <Toolbar overlayYHidden={activeTab !== 'watermark'}>
         {editorItems.map(obj => 
-          <Tool icon = {obj.icon} name = {obj.name} />
+          <Tool icon = {obj.icon} name = {obj.name} {...this.props}/>
         )}
 
         {/* {activeTab === 'adjust' && <Adjust {...this.props}/>}

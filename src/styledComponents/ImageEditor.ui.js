@@ -402,7 +402,6 @@ const Wrapper = styled.div`
 `;
 
 const ToolbarOptionWrapper = styled.div`
-  padding: 20px 15px;
   position: absolute;
   width: 260px;
   height: 100%;
